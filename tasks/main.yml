@@ -8,6 +8,7 @@
     fail_msg: Host {{ ansible_hostname }} does not meet minimal reqs
 
 - name: SSH - Create keys
+  become: true
   ansible.builtin.user:
     name: netology
     generate_ssh_key: yes
@@ -16,22 +17,22 @@
 
 - include_tasks: yum_gitlab.yml
   when:
-    inventory_hostname == "gitlab-01"
+    inventory_hostname == "gitlab"
   tags: [always]
 
 - include_tasks: gitlab.yml
   when:
-    inventory_hostname == "gitlab-01"
+    inventory_hostname == "gitlab"
   tags: [always]
 
 - include_tasks: yum_runner.yml
   when:
-    inventory_hostname == "runner-01"
+    inventory_hostname == "runner"
   tags: [always]
 
 - include_tasks: runner.yml
   when:
-    inventory_hostname == "runner-01"
+    inventory_hostname == "runner"
   tags: [always]
 
 - include_tasks: exporter.yml
@@ -39,7 +40,7 @@
 
 - include_tasks: pipeline.yml
   when:
-    inventory_hostname == "gitlab-01"
+    inventory_hostname == "gitlab"
   tags: [always]
 
 
