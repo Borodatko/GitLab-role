@@ -23,35 +23,35 @@ Role Variables
 | ce_url | gitlab CE repo URL | string | https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh |
 | runner_url | gitlab runner repo URL | string | https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh |
 | gitlab_conf | path to gitlab config file | string | /etc/gitlab/gitlab.rb |
-| gitlab_root_password | password for gitlab user root | string | changeme |
-| gitlab_ip | gilab server ip address| string | changeme |
-| gitlab_registration_token | registration token | string | changeme |
+| gitlab_root_password | password for gitlab user root | string | CHANGEME |
+| gitlab_ip | gilab server ip address| string | CHANGEME |
+| gitlab_registration_token | registration token | string | CHANGEME |
 | runner_desc | gitlab runner description | string | ssh-runner |
 | runner_exec | gitlab runner executor | string | ssh |
-| runner_ssh_host | remote host | string | changeme |
+| runner_ssh_host | remote host | string | CHANGEME |
 | runner_ssh_port | remote host port | number | 22 |
-| runner_ssh_user | user name | string | changeme |
-| runner_ssh_password | user password | string | changeme |
-| runner_ssh_id | identity file to be used | string | changeme |
+| runner_ssh_user | user name | string | CHANGEME |
+| runner_ssh_password | user password | string | CHANGEME |
+| runner_ssh_id | identity file to be used | string | CHANGEME |
 | runner_ssh_host_key_check | disable SSH strict host key checking | bool | true |
 | node_exporter_version | prometheus node exporter version | string | 1.3.1 |
 | node_exporter_archive | downloaded archive | string | {{ tmp_path }}/node_exporter-{{ node_exporter_version }}.{{ arch }}.tar.gz |
 | node_exporter_path_tmp | temporary path | string | {{ tmp_path }}/node_exporter-{{ node_exporter_version }}.{{ arch }} |
 | systemd_path | systemd unit file path | string | /etc/systemd/system |
-| gitlab_api_url | resolvable endpoint for the API | string | changeme |
-| gitlab_api_token_root | access API token for root | string | changeme |
-| gitlab_api_token_user | access APT token for user | string | changeme |
-| gitlab_name | name of the user | string | changeme |
-| gitlab_username | username of the user | string | chagneme |
-| gitlab_password | the password of the user | string | changeme |
-| gitlab_email | user's email | string | changeme |
+| gitlab_api_url | resolvable endpoint for the API | string | CHANGEME |
+| gitlab_api_token_root | access API token for root | string | CHANGEME |
+| gitlab_api_token_user | access APT token for user | string | CHANGEME |
+| gitlab_name | name of the user | string | CHANGEME |
+| gitlab_username | username of the user | string | CHANGEME |
+| gitlab_password | the password of the user | string | CHANGEME |
+| gitlab_email | user's email | string | CHANGEME |
 | gitlab_confirm | require confirmation | bool | no |
-| gitlab_sshkey_name | name of the SSH key | string | changeme |
-| gitlab_sshkey_file | SSH public key itself | string | changeme |
-| gitlab_access_level | access level to the group | string | owner |
-| gitlab_group_name | name of the group  | string | wp |
-| gitlab_group_path | specific path of the group | string | wp |
-| gitlab_project_name | name of the project | string | Wordpress |
+| gitlab_sshkey_name | name of the SSH key | string | CHANGEME |
+| gitlab_sshkey_file | SSH public key itself | string | CHANGEME |
+| gitlab_access_level | access level to the group | string | CHANGEME |
+| gitlab_group_name | name of the group  | string | CHANGEME |
+| gitlab_group_path | specific path of the group | string | CHANGEME |
+| gitlab_project_name | name of the project | string | CHANGEME |
 
 
 Example Playbook

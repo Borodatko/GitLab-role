@@ -7,18 +7,18 @@ runner_url: "https://packages.gitlab.com/install/repositories/runner/gitlab-runn
 
 # gitlab.yml
 gitlab_conf: "/etc/gitlab/gitlab.rb"
-gitlab_root_password: "1q2w3e4r"
+gitlab_root_password: "CHANGEME"
 
 # runner.yml
-gitlab_ip: "10.20.100.154"
-gitlab_registration_token: "QazWsxEdc"
+gitlab_ip: "CHANGEME"
+gitlab_registration_token: "CHANGEME"
 runner_desc: "ssh-runner"
 runner_exec: "ssh"
-runner_ssh_host: "10.20.100.153"
+runner_ssh_host: "CHANGEME"
 runner_ssh_port: "22"
-runner_ssh_user: "netology"
-runner_ssh_password: "netology"
-runner_ssh_id: "/home/netology/.ssh/id_rsa"
+runner_ssh_user: "CHANGEME"
+runner_ssh_password: "CHANGEME"
+runner_ssh_id: "CHANGEME"
 runner_ssh_host_key_check: "true"
 
 # exporter.yml
@@ -28,21 +28,17 @@ node_exporter_path_tmp: "{{ tmp_path }}/node_exporter-{{ node_exporter_version }
 systemd_path: "/etc/systemd/system"
 
 # pipeline.yml
-gitlab_api_url: "http://gitlab.test.lab/"
-gitlab_api_token_root: "r5tH7WvBKK1see7Ui1Y6"
-gitlab_api_token_user: "f6errlR7UUiqwedgeG5Q"
-gitlab_name: "Netology"
-gitlab_username: "netology"
-gitlab_password: "netology"
-gitlab_email: "dim_id_roll@mail.ru"
+gitlab_api_url: "CHANGEME"
+gitlab_api_token_root: "CHANGEME"
+gitlab_api_token_user: "CHANGEME"
+gitlab_name: "CHANGEME"
+gitlab_username: "CHANGEME"
+gitlab_password: "CHANGEME"
+gitlab_email: "CHANGEME"
 gitlab_confirm: "no"
-gitlab_sshkey_name: "MySSH"
-gitlab_sshkey_file: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCurKUpaNQ0EW//x0SaoPiB
-584CUBuU1rEm0k7OGVsDN2skLlP1WeveidUojcsduzpgIIXgnhysAgznVkumhcaJ1wo+fMZsbWX7b
-/N+gnLMt9O28KHvP09fljH2O1UGK6NsNrfoMCuR1LXpgJXVgn/HhAHMEqorM9Xh1Y4jxov0Qz+6Lz
-VlMzd1oDejvcUw6weksSd8NZ+A16C/j2t4m/0+bgr4H/5nWWz3CoYkoq3wh2khuoohO63o666V+yV
-9eMsyZbokz1vHHn3mWDzYrE3icMdTTTl9GMM/1wwWSGZIPDbj/QNY0umHMtPjbo35OaieE4GawuCz2t04mqJXml4Z dorlov@ansible"
-gitlab_access_level: "owner"
-gitlab_group_name: "wp"
-gitlab_group_path: "wp"
-gitlab_project_name: "Wordpress"
+gitlab_sshkey_name: "CHANGEME"
+gitlab_sshkey_file: "CHANGEME"
+gitlab_access_level: "CHANGEME"
+gitlab_group_name: "CHANGEME"
+gitlab_group_path: "CHANGEME"
+gitlab_project_name: "CHANGEME"
