@@ -8,18 +8,27 @@
     executable: pip3
   tags: gitlab
 
-- name: Secure Install - Copy shell-script for root
+- name: Pipeline - Check if root script exist
+  become: true
+  ansible.builtin.stat:
+    path: "{{ tmp_path }}/script_root.sh"
+  register: script
+  tags: gitlab
+
+- name: Pipeline - Copy shell-script for root
   become: true
   ansible.builtin.template:
     src: script_root.sh.j2
     dest: "{{ tmp_path }}/script_root.sh"
     mode: '755'
+  when: not script.stat.exists
   tags: gitlab
 
 - name: Pipeline - Create API token for root
   become: true
   command: "{{ tmp_path }}/script_root.sh"
   register: token
+  when: not script.stat.exists
   tags: gitlab
 
 - name: Pipeline - Add user Netology
@@ -39,18 +48,27 @@
     ansible_python_interpreter: /usr/bin/python3.6
   tags: gitlab
 
-- name: Secure Install - Copy shell-script for netology
+- name: Pipeline - Check if netology script exist
+  become: true
+  ansible.builtin.stat:
+    path: "{{ tmp_path }}/script_netology.sh"
+  register: script
+  tags: gitlab
+
+- name: Pipeline - Copy shell-script for netology
   become: true
   ansible.builtin.template:
     src: script_netology.sh.j2
     dest: "{{ tmp_path }}/script_netology.sh"
     mode: '755'
+  when: not script.stat.exists
   tags: gitlab
 
 - name: Pipeline - Create API token for netology
   become: true
   command: "{{ tmp_path }}/script_netology.sh"
   register: token
+  when: not script.stat.exists
   tags: gitlab
 
 - name: Pipeline - Create Group

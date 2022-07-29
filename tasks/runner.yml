@@ -20,7 +20,6 @@
       --ssh-host="{{ runner_ssh_host }}" \
       --ssh-port="{{ runner_ssh_port }}" \
       --ssh-user="{{ runner_ssh_user }}" \
-      --ssh-password="{{ runner_ssh_password }}" \
       --ssh-identity-file="{{ runner_ssh_id }}" \
       --ssh-disable-strict-host-key-checking="{{ runner_ssh_host_key_check }}"
   tags: gitlab

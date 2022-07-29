@@ -17,7 +17,6 @@ runner_exec: "ssh"
 runner_ssh_host: "CHANGEME"
 runner_ssh_port: "22"
 runner_ssh_user: "CHANGEME"
-runner_ssh_password: "CHANGEME"
 runner_ssh_id: "CHANGEME"
 runner_ssh_host_key_check: "true"
 
