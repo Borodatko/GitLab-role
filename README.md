@@ -55,9 +55,6 @@ Role Variables
 | gitlab_sshkey_name | name of the SSH key | string | CHANGEME |
 | gitlab_sshkey_file | SSH public key itself | string | CHANGEME |
 | gitlab_access_level | access level to the group | string | CHANGEME |
-| gitlab_group_name | name of the group  | string | CHANGEME |
-| gitlab_group_path | specific path of the group | string | CHANGEME |
-| gitlab_project_name | name of the project | string | CHANGEME |
 
 
 Example Playbook

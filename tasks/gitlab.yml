@@ -8,7 +8,7 @@
     replace: external_url 'http://{{ gitlab_ip }}'
   tags: gitlab
 
-- name: Update GitLab Config
+- name: GitLab CE - Update GitLab Config
   become: yes
   ansible.builtin.lineinfile:
     dest: "{{ gitlab_conf }}"
@@ -27,3 +27,44 @@
 
 - name: Flush handlers
   meta: flush_handlers
+
+- name: GitLab CE - Install gitlab module
+  become: true
+  ansible.builtin.pip:
+    name:
+      - python-gitlab
+    executable: pip3
+  tags: gitlab
+
+- name: GitLab CE - Check if root script exist
+  become: true
+  ansible.builtin.stat:
+    path: "{{ tmp_path }}/script_root.sh"
+  register: script
+  tags: gitlab
+
+- name: GitLab CE - Copy shell-script for root
+  become: true
+  ansible.builtin.template:
+    src: script_root.sh.j2
+    dest: "{{ tmp_path }}/script_root.sh"
+    mode: '755'
+  when: not script.stat.exists
+  tags: gitlab
+
+- name: GitLab CE - Add user
+  community.general.gitlab_user:
+    api_url: "{{ gitlab_api_url }}"
+    api_token: "{{ gitlab_api_token_root }}"
+    name: "{{ gitlab_name }}"
+    username: "{{ gitlab_username }}"
+    password: "{{ gitlab_password }}"
+    email: "{{ gitlab_email }}"
+    confirm: "{{ gitlab_confirm }}"
+    sshkey_name: "{{ gitlab_sshkey_name }}"
+    sshkey_file: "{{ gitlab_sshkey_file }}"
+    state: present
+    access_level: "{{ gitlab_access_level }}"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
+  tags: gitlab

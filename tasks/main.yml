@@ -30,9 +30,3 @@
 - include_tasks: exporter.yml
   tags: [always]
 
-- include_tasks: pipeline.yml
-  when:
-    inventory_hostname == "gitlab"
-  tags: [always]
-
-
