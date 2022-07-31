@@ -52,6 +52,13 @@
   when: not script.stat.exists
   tags: gitlab
 
+- name: GitLab CE - Create API token for root
+  become: true
+  command: "{{ tmp_path }}/script_root.sh"
+  register: token
+  when: not script.stat.exists
+  tags: gitlab
+
 - name: GitLab CE - Add user
   community.general.gitlab_user:
     api_url: "{{ gitlab_api_url }}"
