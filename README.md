@@ -27,6 +27,17 @@ Role Variables
 | ***gitlab.yml*** |
 | gitlab_conf | path to gitlab config file | string | /etc/gitlab/gitlab.rb |
 | gitlab_root_password | password for gitlab user root | string | CHANGEME |
+| gitlab_api_url | resolvable endpoint for the API | string | CHANGEME |
+| gitlab_api_token_root | access API token for root | string | CHANGEME |
+| gitlab_api_token_user | access APT token for user | string | CHANGEME |
+| gitlab_name | name of the user | string | CHANGEME |
+| gitlab_username | username of the user | string | CHANGEME |
+| gitlab_password | the password of the user | string | CHANGEME |
+| gitlab_email | user's email | string | CHANGEME |
+| gitlab_confirm | require confirmation | bool | no |
+| gitlab_sshkey_name | name of the SSH key | string | CHANGEME |
+| gitlab_sshkey_file | SSH public key itself | string | CHANGEME |
+| gitlab_access_level | access level to the group | string | CHANGEME |
 | ***runner.yml*** |
 | gitlab_ip | gilab server ip address| string | CHANGEME |
 | gitlab_registration_token | registration token | string | CHANGEME |
@@ -43,18 +54,6 @@ Role Variables
 | node_exporter_archive | downloaded archive | string | {{ tmp_path }}/node_exporter-{{ node_exporter_version }}.{{ arch }}.tar.gz |
 | node_exporter_path_tmp | temporary path | string | {{ tmp_path }}/node_exporter-{{ node_exporter_version }}.{{ arch }} |
 | systemd_path | systemd unit file path | string | /etc/systemd/system |
-| ***pipeline.yml*** |
-| gitlab_api_url | resolvable endpoint for the API | string | CHANGEME |
-| gitlab_api_token_root | access API token for root | string | CHANGEME |
-| gitlab_api_token_user | access APT token for user | string | CHANGEME |
-| gitlab_name | name of the user | string | CHANGEME |
-| gitlab_username | username of the user | string | CHANGEME |
-| gitlab_password | the password of the user | string | CHANGEME |
-| gitlab_email | user's email | string | CHANGEME |
-| gitlab_confirm | require confirmation | bool | no |
-| gitlab_sshkey_name | name of the SSH key | string | CHANGEME |
-| gitlab_sshkey_file | SSH public key itself | string | CHANGEME |
-| gitlab_access_level | access level to the group | string | CHANGEME |
 
 
 Example Playbook
