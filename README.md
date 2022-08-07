@@ -39,7 +39,7 @@ Role Variables
 | gitlab_sshkey_file | SSH public key itself | string | CHANGEME |
 | gitlab_access_level | access level to the group | string | CHANGEME |
 | ***runner.yml*** |
-| gitlab_ip | gilab server ip address| string | CHANGEME |
+| gitlab_domain_name | gilab server address| string | CHANGEME |
 | gitlab_registration_token | registration token | string | CHANGEME |
 | runner_desc | gitlab runner description | string | ssh-runner |
 | runner_exec | gitlab runner executor | string | ssh |

@@ -5,7 +5,7 @@
   ansible.builtin.replace:
     path: "{{ gitlab_conf }}"
     regexp: external_url 'http://gitlab.example.com'
-    replace: external_url 'http://{{ gitlab_ip }}'
+    replace: external_url 'https://{{ gitlab_domain_name }}'
   tags: gitlab
 
 - name: GitLab CE - Update GitLab Config
@@ -16,6 +16,8 @@
   with_items:
     - gitlab_rails['initial_root_password'] = "{{ gitlab_root_password }}"
     - gitlab_rails['initial_shared_runners_registration_token'] = "{{ gitlab_registration_token }}"
+    - nginx['listen_port'] = 80
+    - nginx['listen_https'] = false
   tags: gitlab
 
 - name: GitLab CE - Reconfigure

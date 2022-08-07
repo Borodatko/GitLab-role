@@ -20,7 +20,7 @@ gitlab_sshkey_file: "CHANGEME"
 gitlab_access_level: "CHANGEME"
 
 # runner.yml
-gitlab_ip: "CHANGEME"
+gitlab_domain_name: "CHANGEME"
 gitlab_registration_token: "CHANGEME"
 runner_desc: "ssh-runner"
 runner_exec: "ssh"
