@@ -77,3 +77,47 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3.6
   tags: gitlab
+
+- name: GitLab CE - Check if netology script exist
+  become: true
+  ansible.builtin.stat:
+    path: "{{ tmp_path }}/script_netology.sh"
+  register: script
+  tags: gitlab
+
+- name: Secure Install - Copy shell-script for netology
+  become: true
+  ansible.builtin.template:
+    src: script_netology.sh.j2
+    dest: "{{ tmp_path }}/script_netology.sh"
+    mode: '755'
+  when: not script.stat.exists
+  tags: gitlab
+
+- name: Pipeline - Create API token for netology
+  become: true
+  command: "{{ tmp_path }}/script_netology.sh"
+  register: token
+  when: not script.stat.exists
+  tags: gitlab
+
+- name: Pipeline - Create Group
+  community.general.gitlab_group:
+    api_url: "{{ gitlab_api_url }}"
+    api_token: "{{ gitlab_api_token_user }}"
+    name: "{{ gitlab_group_name }}"
+    path: "{{ gitlab_group_path }}"
+    state: present
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
+  tags: gitlab
+
+- name: Pipeline - Create GitLab Project Wordpress
+  community.general.gitlab_project:
+    api_url: "{{ gitlab_api_url }}"
+    api_token: "{{ gitlab_api_token_user }}"
+    name: "{{ gitlab_project_name }}"
+    group: "{{ gitlab_group_name }}"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
+  tags: gitlab
