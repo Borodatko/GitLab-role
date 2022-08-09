@@ -22,14 +22,14 @@
 
 - name: GitLab CE - Check status
   become: true
-  shell: 'gitlab-ctl status'    
+  command: 'gitlab-ctl status'    
   register: status
   tags: gitlab
 
 - name: GitLab CE - Reconfigure
   become: true
   command: 'gitlab-ctl reconfigure'
-  when: status | length == 0
+  when: status.stdout == ""
   notify:
     - Restart gitlab
   tags: gitlab

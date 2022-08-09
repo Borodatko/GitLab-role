@@ -9,12 +9,13 @@
   tags: gitlab
 
 - name: GitLab Runner - Check if runner registered
-  ansible.builtin.lineinfile: 
-    dest: /etc/passwd
-    line: "runners"
+  become: true
+  ansible.builtin.lineinfile:
+    dest: /etc/gitlab-runner/config.toml
+    line: "[[runners]]"
   check_mode: yes
   register: config
-  tag: gitlab
+  tags: gitlab
 
 - name: GitLab Runner - Register runner
   become: true
@@ -30,5 +31,5 @@
       --ssh-user="{{ runner_ssh_user }}" \
       --ssh-identity-file="{{ runner_ssh_id }}" \
       --ssh-disable-strict-host-key-checking="{{ runner_ssh_host_key_check }}"
-  when: not config.changed
+  when: config.changed
   tags: gitlab
