@@ -8,6 +8,14 @@
     executable: pip3
   tags: gitlab
 
+- name: GitLab Runner - Check if runner registered
+  ansible.builtin.lineinfile: 
+    dest: /etc/passwd
+    line: "runners"
+  check_mode: yes
+  register: config
+  tag: gitlab
+
 - name: GitLab Runner - Register runner
   become: true
   command: |
@@ -22,4 +30,5 @@
       --ssh-user="{{ runner_ssh_user }}" \
       --ssh-identity-file="{{ runner_ssh_id }}" \
       --ssh-disable-strict-host-key-checking="{{ runner_ssh_host_key_check }}"
+  when: not config.changed
   tags: gitlab

@@ -9,7 +9,7 @@
   tags: gitlab
 
 - name: GitLab CE - Update GitLab Config
-  become: yes
+  become: true
   ansible.builtin.lineinfile:
     dest: "{{ gitlab_conf }}"
     line: "{{ item }}"
@@ -20,9 +20,16 @@
     - nginx['listen_https'] = false
   tags: gitlab
 
+- name: GitLab CE - Check status
+  become: true
+  shell: 'gitlab-ctl status'    
+  register: status
+  tags: gitlab
+
 - name: GitLab CE - Reconfigure
   become: true
   command: 'gitlab-ctl reconfigure'
+  when: status | length == 0
   notify:
     - Restart gitlab
   tags: gitlab
