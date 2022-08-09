@@ -5,7 +5,7 @@
   ansible.builtin.replace:
     path: "{{ gitlab_conf }}"
     regexp: external_url 'http://gitlab.example.com'
-    replace: external_url 'https://{{ gitlab_domain_name }}'
+    replace: external_url 'https://{{ gitlab_ip }}'
   tags: gitlab
 
 - name: GitLab CE - Update GitLab Config
@@ -85,7 +85,7 @@
   register: script
   tags: gitlab
 
-- name: Secure Install - Copy shell-script for netology
+- name: GitLab CE - Copy shell-script for netology
   become: true
   ansible.builtin.template:
     src: script_netology.sh.j2
@@ -94,30 +94,19 @@
   when: not script.stat.exists
   tags: gitlab
 
-- name: Pipeline - Create API token for netology
+- name: GitLab CE - Create API token for netology
   become: true
   command: "{{ tmp_path }}/script_netology.sh"
   register: token
   when: not script.stat.exists
   tags: gitlab
 
-- name: Pipeline - Create Group
-  community.general.gitlab_group:
-    api_url: "{{ gitlab_api_url }}"
-    api_token: "{{ gitlab_api_token_user }}"
-    name: "{{ gitlab_group_name }}"
-    path: "{{ gitlab_group_path }}"
-    state: present
-  vars:
-    ansible_python_interpreter: /usr/bin/python3.6
-  tags: gitlab
-
-- name: Pipeline - Create GitLab Project Wordpress
+- name: GitLab CE - Create GitLab Project Wordpress
   community.general.gitlab_project:
     api_url: "{{ gitlab_api_url }}"
     api_token: "{{ gitlab_api_token_user }}"
     name: "{{ gitlab_project_name }}"
-    group: "{{ gitlab_group_name }}"
+    import_url: https://github.com/Borodatko/my_wordpress.git
   vars:
     ansible_python_interpreter: /usr/bin/python3.6
   tags: gitlab

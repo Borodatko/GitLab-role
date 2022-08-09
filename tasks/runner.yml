@@ -13,7 +13,7 @@
   command: |
     gitlab-runner register \
       --non-interactive \
-      --url="http://{{ gitlab_domain_name }}" \
+      --url="http://{{ gitlab_ip }}" \
       --registration-token="{{ gitlab_registration_token }}" \
       --description="{{ runner_desc }}" \
       --executor="{{ runner_exec }}" \
