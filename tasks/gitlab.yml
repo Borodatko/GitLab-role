@@ -106,7 +106,7 @@
     api_url: "{{ gitlab_api_url }}"
     api_token: "{{ gitlab_api_token_user }}"
     name: "{{ gitlab_project_name }}"
-    import_url: https://github.com/Borodatko/my_wordpress.git
+    import_url: "{{ github_url }}"
   vars:
     ansible_python_interpreter: /usr/bin/python3.6
   tags: gitlab
