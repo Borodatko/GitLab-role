@@ -5,7 +5,7 @@
   ansible.builtin.replace:
     path: "{{ gitlab_conf }}"
     regexp: external_url 'http://gitlab.example.com'
-    replace: external_url 'https://{{ gitlab_ip }}'
+    replace: external_url 'http://{{ gitlab_ip }}'
   tags: gitlab
 
 - name: GitLab CE - Update GitLab Config
