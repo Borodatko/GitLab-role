@@ -27,7 +27,7 @@ Role Variables
 | ***gitlab.yml*** |
 | gitlab_conf | path to gitlab config file | string | /etc/gitlab/gitlab.rb |
 | gitlab_root_password | password for gitlab user root | string | CHANGEME |
-| gitlab_api_url | resolvable endpoint for the API | string | CHANGEME |
+| gitlab_api_url | resolvable endpoint for the API (use http://) | string | CHANGEME |
 | gitlab_api_token_root | access API token for root | string | CHANGEME |
 | gitlab_api_token_user | access APT token for user | string | CHANGEME |
 | gitlab_name | name of the user | string | CHANGEME |
