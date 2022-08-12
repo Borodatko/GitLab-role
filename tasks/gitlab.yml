@@ -22,7 +22,7 @@
 
 - name: GitLab CE - Check status
   become: true
-  command: 'gitlab-ctl status'    
+  command: 'gitlab-ctl status'
   register: status
   tags: gitlab
 

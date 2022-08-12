@@ -30,7 +30,7 @@
 - name: Yum - Install GitLab CE
   become: true
   ansible.builtin.yum:
-    name: 
+    name:
       - gitlab-ce
     state: latest
   tags: gitlab

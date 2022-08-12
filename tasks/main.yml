@@ -29,4 +29,3 @@
 
 - include_tasks: exporter.yml
   tags: [always]
-

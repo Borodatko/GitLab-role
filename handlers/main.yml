@@ -1,5 +1,6 @@
 ---
 # handlers file for gitlab
+
 - name: Reload daemon
   become: true
   ansible.builtin.systemd:
