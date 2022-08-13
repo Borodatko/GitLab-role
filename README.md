@@ -1,5 +1,5 @@
-Role Name
-=========
+GitLab
+======
 
 Ansible role for Gitlab installation & configuration.
 
