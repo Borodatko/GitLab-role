@@ -1,0 +1,27 @@
+---
+
+- name: Set timezone
+  community.general.timezone:
+    name: Europe/Moscow
+
+- name: Firewall - Stop SELinux
+  become: true
+  shell: setenforce 0
+
+- name: Firewall - Disable SELinux
+  become: true
+  ansible.posix.selinux:
+    state: disabled
+
+- name: Hosts - Rename Hostname
+  become: true
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Yum - Upgrade packages
+  become: true
+  yum:
+    name: "*"
+    enablerepo: base,updates,extras
+    state: latest
+    update_cache: yes

@@ -7,6 +7,10 @@
     - ansible_facts['distribution_major_version'] == "7"
     fail_msg: Host {{ ansible_hostname }} does not meet minimal reqs
 
+
+- include_tasks: pretasks.yml
+  tags: [always]
+
 - include_tasks: yum_gitlab.yml
   when:
     inventory_hostname == "gitlab"
