@@ -4,14 +4,16 @@
   community.general.timezone:
     name: Europe/Moscow
 
-- name: Firewall - Stop SELinux
-  become: true
-  shell: setenforce 0
-
 - name: Firewall - Disable SELinux
   become: true
-  ansible.posix.selinux:
+  selinux:
     state: disabled
+
+- name: Firewall - Stop firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    state: stopped
+    enabled: no
 
 - name: Hosts - Rename Hostname
   become: true
