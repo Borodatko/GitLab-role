@@ -6,7 +6,9 @@
     path: "{{ gitlab_conf }}"
     regexp: external_url 'http://gitlab.example.com'
     replace: external_url 'http://{{ gitlab_ip }}'
-  tags: gitlab
+  tags: 
+    - gitlab
+    - ce
 
 - name: GitLab CE - Update GitLab Config
   become: true
@@ -18,13 +20,17 @@
     - gitlab_rails['initial_shared_runners_registration_token'] = "{{ gitlab_registration_token }}"
     - nginx['listen_port'] = 80
     - nginx['listen_https'] = false
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Check status
   become: true
   command: 'gitlab-ctl status'
   register: status
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Reconfigure
   become: true
@@ -32,7 +38,9 @@
   when: status.stdout == ""
   notify:
     - Restart gitlab
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: Flush handlers
   meta: flush_handlers
@@ -43,14 +51,18 @@
     name:
       - python-gitlab
     executable: pip3
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Check if root script exist
   become: true
   ansible.builtin.stat:
     path: "{{ tmp_path }}/script_root.sh"
   register: script
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Copy shell-script for root
   become: true
@@ -59,14 +71,18 @@
     dest: "{{ tmp_path }}/script_root.sh"
     mode: '755'
   when: not script.stat.exists
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Create API token for root
   become: true
   command: "{{ tmp_path }}/script_root.sh"
   register: token
   when: not script.stat.exists
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Add user
   community.general.gitlab_user:
@@ -83,14 +99,18 @@
     access_level: "{{ gitlab_access_level }}"
   vars:
     ansible_python_interpreter: /usr/bin/python3.6
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Check if netology script exist
   become: true
   ansible.builtin.stat:
     path: "{{ tmp_path }}/script_netology.sh"
   register: script
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Copy shell-script for netology
   become: true
@@ -99,14 +119,18 @@
     dest: "{{ tmp_path }}/script_netology.sh"
     mode: '755'
   when: not script.stat.exists
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Create API token for netology
   become: true
   command: "{{ tmp_path }}/script_netology.sh"
   register: token
   when: not script.stat.exists
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce
 
 - name: GitLab CE - Create GitLab Project Wordpress
   community.general.gitlab_project:
@@ -116,4 +140,6 @@
     import_url: "{{ github_url }}"
   vars:
     ansible_python_interpreter: /usr/bin/python3.6
-  tags: gitlab
+  tags:
+    - gitlab
+    - ce

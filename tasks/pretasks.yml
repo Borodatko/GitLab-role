@@ -3,27 +3,31 @@
 - name: Set timezone
   community.general.timezone:
     name: Europe/Moscow
+  tags:
+    - gitlab
+    - pretasks
 
 - name: Firewall - Disable SELinux
   become: true
   selinux:
     state: disabled
+  tags:
+    - gitlab
+    - pretasks
 
 - name: Firewall - Stop firewalld
   ansible.builtin.systemd:
     name: firewalld
     state: stopped
     enabled: no
+  tags:
+    - gitlab
+    - pretasks
 
 - name: Hosts - Rename Hostname
   become: true
   ansible.builtin.hostname:
     name: "{{ inventory_hostname }}"
-
-- name: Yum - Upgrade packages
-  become: true
-  yum:
-    name: "*"
-    enablerepo: base,updates,extras
-    state: latest
-    update_cache: yes
+  tags:
+    - gitlab
+    - pretasks

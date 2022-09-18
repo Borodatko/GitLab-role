@@ -6,7 +6,9 @@
     name:
       - python-gitlab
     executable: pip3
-  tags: gitlab
+  tags:
+    - gitlab
+    - runner
 
 - name: GitLab Runner - Check if runner registered
   become: true
@@ -15,7 +17,9 @@
     line: "[[runners]]"
   check_mode: yes
   register: config
-  tags: gitlab
+  tags:
+    - gitlab
+    - runner
 
 - name: GitLab Runner - Register runner
   become: true
@@ -32,4 +36,6 @@
       --ssh-identity-file="{{ runner_ssh_id }}" \
       --ssh-disable-strict-host-key-checking="{{ runner_ssh_host_key_check }}"
   when: config.changed
-  tags: gitlab
+  tags:
+    - gitlab
+    - runner

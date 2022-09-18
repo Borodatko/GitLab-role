@@ -1,5 +1,16 @@
 ---
 
+- name: Yum - Upgrade packages
+  become: true
+  yum:
+    name: "*"
+    enablerepo: base,updates,extras
+    state: latest
+    update_cache: yes
+  tags:
+    - gitlab
+    - yum_gitlab
+
 - name: Yum - Install packages
   become: true
   ansible.builtin.yum:
@@ -7,10 +18,13 @@
       - policycoreutils
       - policycoreutils-python
       - postfix
+      - python36
     state: latest
   notify:
     - Start postfix
-  tags: gitlab
+  tags:
+    - gitlab
+    - yum_gitlab
 
 - name: Flush handlers
   meta: flush_handlers
@@ -20,12 +34,16 @@
     url: "{{ ce_url }}"
     dest: "{{ tmp_path }}/script.rpm.sh"
     mode: '0755'
-  tags: gitlab
+  tags:
+    - gitlab
+    - yum_gitlab
 
 - name: Yum - Install repo
   become: true
   ansible.builtin.command: "{{ tmp_path }}/script.rpm.sh"
-  tags: gitlab
+  tags:
+    - gitlab
+    - yum_gitlab
 
 - name: Yum - Install GitLab CE
   become: true
@@ -33,4 +51,6 @@
     name:
       - gitlab-ce
     state: latest
-  tags: gitlab
+  tags:
+    - gitlab
+    - yum_gitlab

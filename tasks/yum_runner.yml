@@ -1,25 +1,43 @@
 ---
 
+- name: Yum - Upgrade packages
+  become: true
+  yum:
+    name: "*"
+    enablerepo: base,updates,extras
+    state: latest
+    update_cache: yes
+  tags:
+    - gitlab
+    - yum_runner
+
 - name: Yum - Install packages
   become: true
   ansible.builtin.yum:
     name:
       - policycoreutils
       - postfix
+      - python36
     state: latest
-  tags: gitlab
+  tags:
+    - gitlab
+    - yum_runner
 
 - name: Yum - Get Git Runner repo
   ansible.builtin.get_url:
     url: "{{ runner_url }}"
     dest: "{{ tmp_path }}/script.rpm.sh"
     mode: '0755'
-  tags: gitlab
+  tags:
+    - gitlab
+    - yum_runner
 
 - name: Yum - Install Git Runner repo
   become: true
   ansible.builtin.command: "{{ tmp_path }}/script.rpm.sh"
-  tags: gitlab
+  tags:
+    - gitlab
+    - yum_runner
 
 - name: Yum - Install GitLab Runner
   become: true
@@ -27,4 +45,6 @@
     name:
       - gitlab-runner
     state: latest
-  tags: gitlab
+  tags:
+    - gitlab
+    - yum_runner
