@@ -1,35 +1,40 @@
 ---
-
 - name: Check OS
-  assert:
+  ansible.builtin.assert:
     that:
-    - ansible_facts['os_family'] == "RedHat"
-    - ansible_facts['distribution_major_version'] == "7"
+      - ansible_facts['os_family'] == "RedHat"
+      - ansible_facts['distribution_major_version'] == "7"
     fail_msg: Host {{ ansible_hostname }} does not meet minimal reqs
 
-
-- include_tasks: pretasks.yml
+- name: Pretasks
+  ansible.builtin.include_tasks: pretasks.yml
   tags: [always]
 
-- include_tasks: yum_gitlab.yml
+- name: Install gitlab-ci
+  ansible.builtin.include_tasks: yum_gitlab.yml
   when:
     inventory_hostname == "gitlab"
   tags: [always]
 
-- include_tasks: gitlab.yml
+- name: Configure gitlab-ci
+  ansible.builtin.include_tasks: gitlab.yml
   when:
     inventory_hostname == "gitlab"
   tags: [always]
 
-- include_tasks: yum_runner.yml
+- name: Install gitlab-runner
+  ansible.builtin.include_tasks: yum_runner.yml
   when:
     inventory_hostname == "runner"
   tags: [always]
 
-- include_tasks: runner.yml
+- name: Configure gitlab-runner
+  ansible.builtin.include_tasks: runner.yml
   when:
     inventory_hostname == "runner"
   tags: [always]
 
-- include_tasks: exporter.yml
+- name: Node Exporter
+  ansible.builtin.include_tasks: exporter.yml
   tags: [always]
+...

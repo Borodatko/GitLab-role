@@ -7,6 +7,8 @@ Ansible role for Gitlab installation & configuration.
 Requirements
 ------------
 
+RHEL7-based OS
+
 The following modules are used:
  - community.general.gitlab_user
  - community.general.gitlab_project
@@ -58,7 +60,7 @@ Role Variables
 | runner_ssh_id | identity file to be used | string | /home/centos/.ssh/id_rsa |
 | runner_ssh_host_key_check | disable SSH strict host key checking | bool | true |
 | ***exporter.yml*** |
-| node_exporter_version | prometheus node exporter version | string | 1.3.1 |
+| exporter_version | prometheus node exporter version | string | 1.3.1 |
 | node_exporter_archive | downloaded archive | string | {{ tmp_path }}/node_exporter-{{ node_exporter_version }}.{{ arch }}.tar.gz |
 | node_exporter_path_tmp | temporary path | string | {{ tmp_path }}/node_exporter-{{ node_exporter_version }}.{{ arch }} |
 | systemd_path | systemd unit file path | string | /etc/systemd/system |

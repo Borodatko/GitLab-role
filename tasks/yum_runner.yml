@@ -1,12 +1,11 @@
 ---
-
 - name: Yum - Upgrade packages
   become: true
-  yum:
+  ansible.builtin.yum:
     name: "*"
     enablerepo: base,updates,extras
-    state: latest
-    update_cache: yes
+    state: present
+    update_cache: true
   tags:
     - gitlab
     - yum_runner
@@ -18,7 +17,7 @@
       - policycoreutils
       - postfix
       - python36
-    state: latest
+    state: present
   tags:
     - gitlab
     - yum_runner
@@ -44,7 +43,8 @@
   ansible.builtin.yum:
     name:
       - gitlab-runner
-    state: latest
+    state: present
   tags:
     - gitlab
     - yum_runner
+...

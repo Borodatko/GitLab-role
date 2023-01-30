@@ -1,5 +1,4 @@
 ---
-
 - name: GitLab Runner - Install python-gitlab module
   become: true
   ansible.builtin.pip:
@@ -15,7 +14,7 @@
   ansible.builtin.lineinfile:
     dest: /etc/gitlab-runner/config.toml
     line: "[[runners]]"
-  check_mode: yes
+  check_mode: true
   register: config
   tags:
     - gitlab
@@ -23,7 +22,7 @@
 
 - name: GitLab Runner - Register runner
   become: true
-  command: |
+  ansible.builtin.command: |
     gitlab-runner register \
       --non-interactive \
       --url="http://{{ gitlab_ip }}" \
@@ -39,3 +38,4 @@
   tags:
     - gitlab
     - runner
+...

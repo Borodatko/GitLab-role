@@ -1,12 +1,11 @@
 ---
-
 - name: GitLab CE - Replace external url
   become: true
   ansible.builtin.replace:
     path: "{{ gitlab_conf }}"
     regexp: external_url 'http://gitlab.example.com'
     replace: external_url 'http://{{ gitlab_ip }}'
-  tags: 
+  tags:
     - gitlab
     - ce
 
@@ -26,7 +25,7 @@
 
 - name: GitLab CE - Check status
   become: true
-  command: 'gitlab-ctl status'
+  ansible.builtin.command: 'gitlab-ctl status'
   register: status
   tags:
     - gitlab
@@ -34,7 +33,7 @@
 
 - name: GitLab CE - Reconfigure
   become: true
-  command: 'gitlab-ctl reconfigure'
+  ansible.builtin.command: 'gitlab-ctl reconfigure'
   when: status.stdout == ""
   notify:
     - Restart gitlab
@@ -43,7 +42,7 @@
     - ce
 
 - name: Flush handlers
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: GitLab CE - Install gitlab module
   become: true
@@ -77,7 +76,7 @@
 
 - name: GitLab CE - Create API token for root
   become: true
-  command: "{{ tmp_path }}/script_root.sh"
+  ansible.builtin.command: "{{ tmp_path }}/script_root.sh"
   register: token
   when: not script.stat.exists
   tags:
@@ -125,7 +124,7 @@
 
 - name: GitLab CE - Create API token for netology
   become: true
-  command: "{{ tmp_path }}/script_netology.sh"
+  ansible.builtin.command: "{{ tmp_path }}/script_netology.sh"
   register: token
   when: not script.stat.exists
   tags:
@@ -143,3 +142,4 @@
   tags:
     - gitlab
     - ce
+...

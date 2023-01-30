@@ -1,9 +1,9 @@
 ---
-
 - name: NodeExporter - Get release
   ansible.builtin.get_url:
-    url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.{{ arch }}.tar.gz"
+    url: "https://github.com/prometheus/node_exporter/releases/download/v{{ exporter_version }}/node_exporter-{{ exporter_version }}.{{ arch }}.tar.gz"
     dest: "{{ node_exporter_archive }}"
+    mode: '0644'
   tags:
     - gitlab
     - exporter
@@ -12,7 +12,7 @@
   ansible.builtin.unarchive:
     src: "{{ node_exporter_archive }}"
     dest: "{{ tmp_path }}"
-    remote_src: yes
+    remote_src: true
   tags:
     - gitlab
     - exporter
@@ -22,7 +22,7 @@
   ansible.builtin.copy:
     src: "{{ node_exporter_path_tmp }}/{{ item }}"
     dest: "{{ bin_path }}"
-    remote_src: yes
+    remote_src: true
     mode: '0755'
   with_items:
     - node_exporter
@@ -44,7 +44,7 @@
     - exporter
 
 - name: Flush handlers
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Remove Artifacts
   ansible.builtin.file:
@@ -56,3 +56,4 @@
   tags:
     - gitlab
     - exporter
+...

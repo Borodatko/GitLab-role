@@ -1,12 +1,11 @@
 ---
-
 - name: Yum - Upgrade packages
   become: true
-  yum:
+  ansible.builtin.yum:
     name: "*"
     enablerepo: base,updates,extras
-    state: latest
-    update_cache: yes
+    state: present
+    update_cache: true
   tags:
     - gitlab
     - yum_gitlab
@@ -19,7 +18,7 @@
       - policycoreutils-python
       - postfix
       - python36
-    state: latest
+    state: present
   notify:
     - Start postfix
   tags:
@@ -27,7 +26,7 @@
     - yum_gitlab
 
 - name: Flush handlers
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Yum - Get repo
   ansible.builtin.get_url:
@@ -50,7 +49,8 @@
   ansible.builtin.yum:
     name:
       - gitlab-ce
-    state: latest
+    state: present
   tags:
     - gitlab
     - yum_gitlab
+...

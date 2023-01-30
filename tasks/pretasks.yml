@@ -1,5 +1,4 @@
 ---
-
 - name: Set timezone
   community.general.timezone:
     name: Europe/Moscow
@@ -9,7 +8,7 @@
 
 - name: Firewall - Disable SELinux
   become: true
-  selinux:
+  ansible.posix.selinux:
     state: disabled
   tags:
     - gitlab
@@ -19,7 +18,7 @@
   ansible.builtin.systemd:
     name: firewalld
     state: stopped
-    enabled: no
+    enabled: false
   tags:
     - gitlab
     - pretasks
@@ -31,3 +30,4 @@
   tags:
     - gitlab
     - pretasks
+...
